@@ -21,8 +21,8 @@ function getHumanChoice() {
     }
 }
 
-let humanScore = 0;
 let computerScore = 0;
+let humanScore = 0;
 
 function playRound(humanChoice, computerChoice) {
     switch ((humanChoice - computerChoice + 3) % 3) {
@@ -35,13 +35,25 @@ function playRound(humanChoice, computerChoice) {
             break;
         case 2:
             alert("You win!");
-            humanChoice++;
+            humanScore++;
             break;
     }
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
+function playGame() {
+    const ROUNDS = 5;
+    let humanSelection = null;
+    let computerSelection = null;
 
-playRound(humanSelection, computerSelection);
-console.log(`computer: ${computerScore}. U: ${humanScore}`);
+
+    for (let i = 0; i < ROUNDS; ++i) {
+        humanSelection = getHumanChoice();
+        computerSelection = getComputerChoice();
+        playRound(humanSelection, computerSelection);
+    }
+    alert(`Results
+        Computer: ${computerScore}. 
+        You: ${humanScore}`);
+}
+
+playGame();
