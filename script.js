@@ -9,4 +9,15 @@ function getComputerChoice() {
     }
 }
 
+function getHumanChoice() {
+    let choice = null;
+    while (choice != "rock" && choice != "paper" && choice != "scissors") {
+        choice = prompt('Input your choice. Available variants: "rock", "paper" or "scissors"', "rock");
+    }
+    return choice;
+
+}
+
+
 console.log(getComputerChoice());
+console.log(getHumanChoice());
