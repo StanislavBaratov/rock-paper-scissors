@@ -1,3 +1,8 @@
+const ROCK = 0;
+const PAPER = 1;
+const SCISSORS = 2;
+const INITIAL_TEXT = 'Press the play button to play Rock-Paper-Scissors with PC';
+
 function getComputerChoice() {
     return Math.floor(Math.random() * 3);
 }
@@ -56,4 +61,25 @@ function playGame() {
         You: ${humanScore}`);
 }
 
+function addPlayButton(container) {
+    const playButton = document.createElement('div');
+    const pipkaRight = document.createElement('div');
+
+    playButton.setAttribute('id', 'play');
+    pipkaRight.setAttribute('id', 'pipka-right');
+
+    playButton.appendChild(pipkaRight);
+    container.appendChild(playButton);
+}
+
+//Устанавливаем кнопку play и текст приглашения к игре
+function initializeGameContainer() {
+    const gameContainer = document.querySelector('.game-container');
+    const statusBar = document.querySelector('#statusbar');
+
+    addPlayButton(gameContainer);
+    statusBar.textContent = INITIAL_TEXT;
+}
+
+initializeGameContainer();
 

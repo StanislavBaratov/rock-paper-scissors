@@ -38,7 +38,7 @@ div {
     background-color: aliceblue;
     margin: 20px;
     border: 2px solid black;
-
+    box-shadow: 2px 2px 3px black;
 }
 
 .toolbar {
@@ -74,7 +74,7 @@ button {
     background-color: rgb(187, 255, 119);
 }
 
-#greeting {
+#statusbar {
     font-size: 20px;
     font-weight: 900;
     margin-bottom: 10px;
@@ -83,4 +83,8 @@ button {
 .log {
     height: 90px;
     padding: 10px;
+}
+
+.game-container {
+    height: 150px;
 }
