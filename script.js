@@ -2,6 +2,8 @@ const ROCK = 0;
 const PAPER = 1;
 const SCISSORS = 2;
 const INITIAL_TEXT = 'Press the play button to play Rock-Paper-Scissors with PC';
+const BUTTONS = ['ROCK', 'PAPER', 'SCISSORS'];
+const SCORE_TO_WIN = 5;
 
 function getComputerChoice() {
     return Math.floor(Math.random() * 3);
@@ -72,6 +74,23 @@ function addPlayButton(container) {
     container.appendChild(playButton);
 }
 
+function addRPCButtons() {
+    const controls = document.querySelector('.controls');
+    const toolbar = document.createElement('div');
+    toolbar.setAttribute('class', 'toolbar');
+
+    BUTTONS.forEach((item) => {
+        const button = document.createElement('button');
+        
+        button.setAttribute('type', 'button');
+        button.setAttribute('id', item);
+        button.textContent = item;
+        
+        toolbar.appendChild(button);
+        controls.appendChild(toolbar);
+    });
+
+}
 //Устанавливаем кнопку play и текст приглашения к игре
 function initializeGameContainer() {
     const gameContainer = document.querySelector('.game-container');
@@ -83,3 +102,5 @@ function initializeGameContainer() {
 
 initializeGameContainer();
 
+const playButton = document.querySelector('#play');
+playButton.addEventListener('click', addRPCButtons);
