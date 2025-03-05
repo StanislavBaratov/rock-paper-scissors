@@ -47,11 +47,49 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
+function addPlayButton(container) {
+    const playButton = document.createElement('div');
+    const pipkaRight = document.createElement('div');
+
+    playButton.setAttribute('id', 'play');
+    pipkaRight.setAttribute('id', 'pipka-right');
+
+    playButton.appendChild(pipkaRight);
+    container.appendChild(playButton);
+    return playButton;
+}
+
+function addRPCButtons() {
+    const controls = document.querySelector('.controls');
+    const toolbar = document.createElement('div');
+    toolbar.setAttribute('class', 'toolbar');
+
+    for (let i = 0; i < 3; ++i) {
+        const button = document.createElement('button');
+        
+        button.setAttribute('type', 'button');
+        button.setAttribute('id', i);
+        button.textContent = BUTTONS[i];
+        
+        toolbar.appendChild(button);
+        controls.appendChild(toolbar);
+    }
+
+}
+//Устанавливаем кнопку play и текст приглашения к игре
+function initializeGameContainer() {
+    const gameContainer = document.querySelector('.game-container');
+    const statusBar = document.querySelector('#statusbar');
+
+    const playButton = addPlayButton(gameContainer);
+    playButton.addEventListener('click', addRPCButtons);
+
+    statusBar.textContent = INITIAL_TEXT;
+}
+
 function playGame() {
-    const ROUNDS = 5;
     let humanSelection = null;
     let computerSelection = null;
-
 
     for (let i = 0; i < ROUNDS; ++i) {
         humanSelection = getHumanChoice();
@@ -63,44 +101,4 @@ function playGame() {
         You: ${humanScore}`);
 }
 
-function addPlayButton(container) {
-    const playButton = document.createElement('div');
-    const pipkaRight = document.createElement('div');
-
-    playButton.setAttribute('id', 'play');
-    pipkaRight.setAttribute('id', 'pipka-right');
-
-    playButton.appendChild(pipkaRight);
-    container.appendChild(playButton);
-}
-
-function addRPCButtons() {
-    const controls = document.querySelector('.controls');
-    const toolbar = document.createElement('div');
-    toolbar.setAttribute('class', 'toolbar');
-
-    BUTTONS.forEach((item) => {
-        const button = document.createElement('button');
-        
-        button.setAttribute('type', 'button');
-        button.setAttribute('id', item);
-        button.textContent = item;
-        
-        toolbar.appendChild(button);
-        controls.appendChild(toolbar);
-    });
-
-}
-//Устанавливаем кнопку play и текст приглашения к игре
-function initializeGameContainer() {
-    const gameContainer = document.querySelector('.game-container');
-    const statusBar = document.querySelector('#statusbar');
-
-    addPlayButton(gameContainer);
-    statusBar.textContent = INITIAL_TEXT;
-}
-
 initializeGameContainer();
-
-const playButton = document.querySelector('#play');
-playButton.addEventListener('click', addRPCButtons);
