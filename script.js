@@ -14,6 +14,47 @@ function getHumanChoice(button) {
     return parseInt(button.getAttribute('id'));
 }
 
+function removeRPCButtons() {
+    document.querySelectorAll('button').forEach((item) => item.remove());
+}
+
+function removeScoreBoard() {
+    document.querySelector('#scoreboard').remove();
+}
+
+function removeRestartButton() {
+    document.querySelector('#restart').remove();
+}
+
+function restartGame() {
+    removeScoreBoard();
+    removeRestartButton();
+    initializeGameContainer();
+}
+
+function addRestartButton() {
+    const restartButton = document.createElement('button');
+    restartButton.setAttribute('id', 'restart');
+    restartButton.textContent = 'Restart game';
+    restartButton.addEventListener('click', restartGame);
+
+    const toolbar = document.querySelector('.toolbar');
+    toolbar.appendChild(restartButton);
+
+}
+
+function stopGame() {
+    const humanScore = getHumanScore();
+    const computerScore = getComputerScore();
+    const statusBar = document.querySelector('#statusbar');
+
+    removeRPCButtons();
+    addRestartButton();
+    statusBar.textContent = humanScore > computerScore ? 'You won!' : 'Computer won!';
+
+
+}
+
 function updateScore(humanChoice, computerChoice) {
     let computerScore = getComputerScore();
     let humanScore = getHumanScore();
@@ -38,7 +79,7 @@ function updateScore(humanChoice, computerChoice) {
 
     scoreBoard.textContent = `${humanScore}:${computerScore}`;
     if (humanScore === SCORE_TO_WIN || computerScore === SCORE_TO_WIN) {
-        alert('Game over!');
+        stopGame();
     }
 }
 
