@@ -120,9 +120,7 @@ function playRound(event) {
 }
 
 function addRPCButtons() {
-    const controls = document.querySelector('.controls');
-    const toolbar = document.createElement('div');
-    toolbar.setAttribute('class', 'toolbar');
+    const toolbar = document.querySelector('.toolbar');
 
     for (let i = 0; i < 3; ++i) {
         const button = document.createElement('button');
@@ -134,9 +132,6 @@ function addRPCButtons() {
         
         toolbar.appendChild(button);   
     }
-    
-    controls.appendChild(toolbar);
-
 }
 
 function addScoreBoard() {
