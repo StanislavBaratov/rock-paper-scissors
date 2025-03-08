@@ -10,19 +10,8 @@ function getComputerChoice() {
     return Math.floor(Math.random() * 3);
 }
 
-function getHumanChoice(event) {
-    let choice = event.target.getAttribute('id');
-    switch (choice) {
-        case "ROCK":
-            return 0;
-            break;
-        case "PAPER":
-            return 1;
-            break;
-        case "SCISSORS":
-            return 2;
-            break;
-    }
+function getHumanChoice(button) {
+    return parseInt(button.getAttribute('id'));
 }
 
 function updateScore(humanChoice, computerChoice) {
@@ -61,6 +50,22 @@ function setFirstMoveText() {
     document.querySelector('#statusbar').textContent = 'Your move';
 }
 
+function getComputerScore() {
+    scoreBoard = document.querySelector('#scoreboard');
+    return scoreBoard.textContent.split(':')[1];
+}
+
+function getHumanScore() {
+    scoreBoard = document.querySelector('#scoreboard');
+    return scoreBoard.textContent.split(':')[0];
+}
+
+function playRound(event) {
+    const computerChoice = getComputerChoice();
+    const humanChoice = getHumanChoice(event.target);
+    updateScore(humanChoice, computerChoice);
+}
+
 function addRPCButtons() {
     const controls = document.querySelector('.controls');
     const toolbar = document.createElement('div');
@@ -72,7 +77,7 @@ function addRPCButtons() {
         button.setAttribute('type', 'button');
         button.setAttribute('id', i);
         button.textContent = BUTTONS[i];
-        button.addEventListener('click', getHumanChoice);
+        button.addEventListener('click', playRound);
         
         toolbar.appendChild(button);   
     }
@@ -92,31 +97,22 @@ function addScoreBoard() {
     return scoreBoard;
 }
 
+function startGame() {
+    removePlayButton();
+    addRPCButtons();
+    setFirstMoveText();
+    addScoreBoard();
+}
+
 //Устанавливаем кнопку play и текст приглашения к игре
 function initializeGameContainer() {
     const gameContainer = document.querySelector('.game-container');
     const statusBar = document.querySelector('#statusbar');
 
     const playButton = addPlayButton(gameContainer);
-    playButton.addEventListener('click', playGame);
+    playButton.addEventListener('click', startGame);
 
     statusBar.textContent = INITIAL_TEXT;
-}
-
-function playGame() {
-    removePlayButton();
-    addRPCButtons();
-    setFirstMoveText();
-    const scoreBoard = addScoreBoard();
-
-    let humanScore = 0;
-    let computerScore = 0;
-    let humanSelection = null;
-    let computerSelection = null;
-
-    alert(`Results
-        Computer: ${computerScore}. 
-        You: ${humanScore}`);
 }
 
 initializeGameContainer();
