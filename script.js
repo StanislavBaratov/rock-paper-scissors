@@ -68,12 +68,12 @@ function updateScore(humanChoice, computerChoice) {
             statusBar.textContent = 'Draw! ' + moves;
             break;
         case 1:
-            statusBar.textContent = 'Computer won! ' + moves;
-            computerScore++;
-            break;
-        case 2:
             statusBar.textContent = 'You won! ' + moves;
             humanScore++;
+            break;
+        case 2:
+            statusBar.textContent = 'Computer won! ' + moves;
+            computerScore++;
             break;
     }
 
