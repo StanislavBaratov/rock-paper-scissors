@@ -15,18 +15,30 @@ function getHumanChoice(button) {
 }
 
 function updateScore(humanChoice, computerChoice) {
+    let computerScore = getComputerScore();
+    let humanScore = getHumanScore();
+    const statusBar = document.querySelector('#statusbar');
+    const humanMove = BUTTONS[humanChoice];
+    const computerMove = BUTTONS[computerChoice];
+    const moves = `Your move: ${humanMove}. PC's move: ${computerMove}`;
+
     switch ((humanChoice - computerChoice + 3) % 3) {
         case 0:
-            alert("Draw");
+            statusBar.textContent = 'Draw! ' + moves;
             break;
         case 1:
-            alert("Computer win");
+            statusBar.textContent = 'Computer won! ' + moves;
             computerScore++;
             break;
         case 2:
-            alert("You win!");
+            statusBar.textContent = 'You won! ' + moves;
             humanScore++;
             break;
+    }
+
+    scoreBoard.textContent = `${humanScore}:${computerScore}`;
+    if (humanScore === SCORE_TO_WIN || computerScore === SCORE_TO_WIN) {
+        alert('Game over!');
     }
 }
 
@@ -52,12 +64,12 @@ function setFirstMoveText() {
 
 function getComputerScore() {
     scoreBoard = document.querySelector('#scoreboard');
-    return scoreBoard.textContent.split(':')[1];
+    return parseInt(scoreBoard.textContent.split(':')[1]);
 }
 
 function getHumanScore() {
     scoreBoard = document.querySelector('#scoreboard');
-    return scoreBoard.textContent.split(':')[0];
+    return parseInt(scoreBoard.textContent.split(':')[0]);
 }
 
 function playRound(event) {
